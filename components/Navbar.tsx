@@ -1,9 +1,12 @@
 "use client";
 
+import { useState } from "react";
 import { Bell } from "lucide-react";
 import Image from "next/image";
 
 export default function Navbar() {
+  const [active, setActive] = useState("Dashboard");
+
   return (
     <nav className="bg-[#1E2131] text-white px-10 py-4 flex items-center justify-between shadow-md">
       {/* Left Side - Logo */}
@@ -13,16 +16,17 @@ export default function Navbar() {
         </h1>
       </div>
 
-      {/* Center - Navigation Links (Hover Effect Only) */}
+      {/* Center - Navigation Links */}
       <div className="flex space-x-8 text-sm font-medium">
         {["Dashboard", "Projects", "Team", "Clients", "Time", "Reports"].map(
-          (item, index) => (
+          (item) => (
             <span
-              key={index}
+              key={item}
+              onClick={() => setActive(item)}
               className="relative pb-1 hover:text-gray-300 transition-all cursor-pointer"
             >
               {item}
-              {item === "Dashboard" && ( // Active link underline
+              {active === item && ( // Active link underline on click
                 <span className="absolute left-0 -bottom-1 h-[2px] w-full bg-teal-400"></span>
               )}
             </span>
